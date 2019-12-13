@@ -420,9 +420,10 @@ firmware_directories /vendor/firmware_mnt/image/
 
 /sys/devices/virtual/hdcp/msm_hdcp  min_level_change 0664    system  graphics
 
-# lirc
+# Ir
 /dev/lirc0                0660   system     system
 /dev/peel_ir              0660   system     system
+/dev/spidev5.1            0660   system     system
 
 # /dev/sensors only supports an ioctl to get the current SLPI timestamp
 # allow the sensors daemon to perform this as non-root

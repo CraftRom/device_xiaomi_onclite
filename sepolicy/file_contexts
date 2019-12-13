@@ -19,6 +19,7 @@
 /(vendor|system/vendor)/usr/keylayout(/.*)?                   u:object_r:keylayout_file:s0
 
 # IR
+/dev/spidev5\.1			 u:object_r:lirc_device:s0
 /dev/spidev6\.1                  u:object_r:lirc_device:s0
 
 # Rild
