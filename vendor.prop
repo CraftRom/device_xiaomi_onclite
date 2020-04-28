@@ -80,6 +80,7 @@ ro.hardware.egl=adreno
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.perf.scroll_opt=true
 
 # QTI
 ro.vendor.qti.va_aosp.support=1
