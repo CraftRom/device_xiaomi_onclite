@@ -1,0 +1,3 @@
+# Allow Cast Settings to access WFD prop
+get_prop(wfdservice, vendor_audio_prop)
+get_prop(wfdservice, vendor_system_prop)
