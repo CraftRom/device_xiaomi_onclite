@@ -58,6 +58,12 @@ function blob_fixup() {
     product/lib64/libdpmframework.so)
         "${PATCHELF}" --add-needed "libshim_dpmframework.so" "${2}"
         ;;
+		
+    # memset shim
+    vendor/bin/charge_only_mode)
+        patchelf --add-needed libmemset_shim.so "${2}"
+        ;;
+
     vendor/lib/hw/camera.msm8953.so)
         "${PATCHELF}" --add-needed camera.msm8953_shim.so "${2}"
         ;;
