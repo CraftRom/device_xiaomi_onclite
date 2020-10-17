@@ -29,6 +29,7 @@ cc_library_shared {
         "strdup16to8.cpp",
         "strdup8to16.cpp",
     ],
+}
 
 cc_library {
     name: "libmemset_shim",
