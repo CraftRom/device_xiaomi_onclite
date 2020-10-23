@@ -446,7 +446,6 @@ on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
     start qcom-c_main-sh
     restart vendor.camera-provider-2-4
-    restart vendor.audio-hal-2-0
     start wcnss-service
     restart vendor.fps_hal
 
