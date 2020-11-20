@@ -132,6 +132,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.6 \
     vendor.qti.hardware.camera.device@1.0 \
     libgui_vendor \
+    libdng_sdk.vendor \
     libstdc++.vendor \
     Snap
 
