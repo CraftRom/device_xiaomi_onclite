@@ -22,7 +22,8 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-pe
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    $(LOCAL_PATH)/overlay/frameworks/opt/net/wifi
+    $(LOCAL_PATH)/overlay/frameworks/opt/net/wifi \
+    $(LOCAL_PATH)/overlay/packages/apps/CarrierConfig
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
