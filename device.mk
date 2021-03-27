@@ -310,7 +310,10 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw \
-    libstagefright_omx.vendor
+	libstagefright_omx.vendor \
+    libstagefright_softomx \
+    libstagefright_enc_common
+
 
 # Overlays
 PRODUCT_PACKAGES += \
