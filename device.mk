@@ -394,6 +394,11 @@ PRODUCT_PACKAGES += \
     camera.msm8953_shim \
     libshim_dpmframework
 
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-service
+
 # USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
