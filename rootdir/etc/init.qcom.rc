@@ -483,12 +483,12 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
     user root
     shutdown critical
     ioprio rt 0
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 service vendor.tftp_server /vendor/bin/tftp_server
    class core
    user root
-   writepid /dev/cpuset/system-background/tasks
+   task_profiles ServiceCapacityLow
 
 on property:vendor.bluetooth.hciattach=true
     setprop vendor.bluetooth.status on
@@ -500,16 +500,20 @@ service atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 service vendor.sensors.qti /vendor/bin/sensors.qti
     class core
     user system
     group system
+<<<<<<< HEAD
     # Grants the ability for this daemon to bind IPC router ports so it can
     # register QMI services
     capabilities NET_BIND_SERVICE
     writepid /dev/cpuset/system-background/tasks
+=======
+    task_profiles ServiceCapacityLow
+>>>>>>> b5e6e77 (onclite: rootdir: Replace writepid with task_profiles command for cgroup migration)
 
 service vendor-sensor-sh /vendor/bin/init.qcom.sensors.sh
     class core
@@ -535,7 +539,7 @@ service loc_launcher /system/vendor/bin/loc_launcher
     class late_start
     user gps
     group gps
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 service qcom-sh /vendor/bin/init.qcom.sh
     class late_start
@@ -606,7 +610,7 @@ service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock
     capabilities BLOCK_SUSPEND SYS_NICE
     ioprio rt 4
-    writepid /dev/cpuset/foreground/tasks /dev/stune/foreground/tasks
+    task_profiles ProcessCapacityHigh HighPerformance
     onrestart restart audioserver
 
 service vendor.contexthub-hal-1-0 /vendor/bin/hw/android.hardware.contexthub@1.0-service
