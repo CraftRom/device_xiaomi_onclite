@@ -630,4 +630,13 @@
         <transport>hwbinder</transport>
         <fqname>@2.1::IHealth/default</fqname>
     </hal>
+    <hal format="hidl">
+        <name>com.dsi.ant</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAnt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </manifest>
