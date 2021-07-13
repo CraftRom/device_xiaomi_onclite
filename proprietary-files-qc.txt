@@ -1649,11 +1649,10 @@ vendor/lib64/libthermalfeature.so|1c408911610e5b6a11853aff1900860f9e9a861f
 vendor/lib/hw/thermal.msm8953.so|a1819a519f45ce8c7b8243dc5d3cda1d214c23bd
 vendor/lib64/hw/thermal.msm8953.so|9de56e5cccbb4cf1d507877ec328db2bd229c2c2
 
-# Time services - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
--vendor/app/TimeService/TimeService.apk|27f9b81621c446baa8c37581d9bfbca2fd67b496
-vendor/bin/time_daemon|75b8a6a14cfb4424499ccb2bf1cad011df295d0e
-vendor/lib/libtime_genoff.so|a574d287e7e73649685b702f4fe497eb7c6ba727
-vendor/lib64/libtime_genoff.so|06df52867790cdbbcc674a3a28d7ad7c8cc161ac
+# Time services - LA.UM.9.6.2.r1-04100-89xx.0
+-vendor/app/TimeService/TimeService.apk|1a5f39aa2969feee50ff81ec870b5e2669ae515e
+vendor/bin/time_daemon|737bbb156a23d114aafd4b4bb9adc38e8d965391
+vendor/lib64/libtime_genoff.so|3f57de1aeb7aa113a0a579cebed85ab4405b9b49
 
 # Voice - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
 vendor/lib/vendor.qti.voiceprint@1.0.so|b70091c7b738394468b7d732df283d23a3975f46
