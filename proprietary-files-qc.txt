@@ -1339,7 +1339,17 @@ vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc|c9877b6cae0353d5fdea5bc
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so|656009a5cc2b3bc52a7706579a192a1f3328f37c
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so|78f8db9acff8b3461d6d37c747b1bdb59e547bb5
 
-# QMI - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
+# QCC VND HAL - LA.UM.9.6.2.r1-04100-89xx.0
+vendor/bin/hw/vendor.qti.hardware.qccvndhal@1.0-service|66eed303012e050a8ee2eb8550a49dbd7665b2e6
+vendor/etc/init/vendor.qti.hardware.qccvndhal@1.0-service.rc|afeb332a4750a11587658fcc9a75a27f63bbccdd
+vendor/lib/hw/vendor.qti.hardware.qccvndhal@1.0-impl.so|889b3da506cef39acf7f42c11ba1cd1bdfefd674
+vendor/lib/vendor.qti.hardware.qccvndhal@1.0.so|1698e74aa436ac5ef3ad708c15ff3bc8aec98460
+vendor/lib/vendor.qti.hardware.qccvndhal@1.0-halimpl.so|3f2e7b3f1ef034d47e0bfd710556fa203fdb9d6b
+vendor/lib64/hw/vendor.qti.hardware.qccvndhal@1.0-impl.so|d1fccf72e4d84f31b7f0ea2d762be4ac5e185df3
+vendor/lib64/vendor.qti.hardware.qccvndhal@1.0.so|711f50db51cd10607f9065998cac4521950c4d5a
+vendor/lib64/vendor.qti.hardware.qccvndhal@1.0-halimpl.so|8c85aec8456f69296722c10ae034bd228cd70be2
+
+# QMI - daisy (QKQ1.191002.002)
 etc/permissions/qti_libpermissions.xml|593bcb72cce68ceb0a70f50bcae7d460114e7c62
 etc/permissions/qti_permissions.xml|e6ff4572352b1a4f91b6b9d7cbb1cad9924410a0
 vendor/bin/irsc_util|07f4a90a0fb528c5b883a6865184c7d7239e213d
