@@ -138,8 +138,6 @@ DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 
-<<<<<<< HEAD
-=======
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
 
@@ -153,7 +151,6 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
 
->>>>>>> 2c918cbe (onclite: init: Add init_onclite.cpp)
 # Partitions
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864

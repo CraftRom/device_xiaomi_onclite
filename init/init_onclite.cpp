@@ -28,20 +28,19 @@
  */
 
 
-#include <fcntl.h>
 #include <stdlib.h>
+#include <fstream>
+#include <string.h>
 #include <sys/sysinfo.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <unistd.h>
+
+#include <android-base/properties.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 #include "android/log.h"
-#include <android-base/properties.h>
-
-#include <string>
-#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
-#include <sys/_system_properties.h>
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
@@ -50,10 +49,20 @@ char const *heapminfree;
 char const *heapmaxfree;
 char const *heaptargetutilization;
 
-using android::init::property_set;
 using std::string;
 
-void property_override(string prop, string value) {
+void property_override(char const prop[], char const value[], bool add = true)
+{
+    auto pi = (prop_info *) __system_property_find(prop);
+
+    if (pi != nullptr) {
+        __system_property_update(pi, value, strlen(value));
+    } else if (add) {
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+    }
+}
+
+void property_set(string prop, string value) {
     auto pi = (prop_info*) __system_property_find(prop.c_str());
 
     if (pi != nullptr)
@@ -66,9 +75,9 @@ void load_props(string device, string model) {
     string RO_PROP_SOURCES[] = { "", "odm.", "system.", "vendor." };
 
     for (const string &source : RO_PROP_SOURCES) {
-        property_override(string("ro.product.") + source + string("name"), device);
-        property_override(string("ro.product.") + source + string("device"), device);
-        property_override(string("ro.product.") + source + string("model"), model);
+        property_set(string("ro.product.") + source + string("name"), device);
+        property_set(string("ro.product.") + source + string("device"), device);
+        property_set(string("ro.product.") + source + string("model"), model);
     }
 }
 
@@ -106,33 +115,33 @@ void check_device()
         heapminfree = "512k";
         heapmaxfree = "8m";
     }
+    
+        // set rest of Go tweaks for 2 GB
+    if (sys.totalram < 2048ull * 1024 * 1024) {
+        // set lowram options and enable traced by default
+        property_override("ro.config.low_ram", "true");
+        property_override("persist.traced.enable", "true");
+        property_override("ro.statsd.enable", "true");
+        // set threshold to filter unused apps
+        property_override("pm.dexopt.downgrade_after_inactive_days", "10");
+        // set the compiler filter for shared apks to quicken
+        property_override("pm.dexopt.shared", "quicken");
+	// set swap options
+	property_override("ro.vendor.qti.config.swap", "true");
+    }
 }
 
 void vendor_load_properties()
 {
     check_device();
 
-    property_set("dalvik.vm.heapstartsize", heapstartsize);
-    property_set("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    property_set("dalvik.vm.heapsize", heapsize);
-    property_set("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    property_set("dalvik.vm.heapminfree", heapminfree);
-    property_set("dalvik.vm.heapmaxfree", heapmaxfree);
-    
-    // set rest of Go tweaks for 2 GB
-    if (sys.totalram < 2048ull * 1024 * 1024) {
-        // set lowram options and enable traced by default
-        property_set("ro.config.low_ram", "true");
-        property_set("persist.traced.enable", "true");
-        property_set("ro.statsd.enable", "true");
-        // set threshold to filter unused apps
-        property_set("pm.dexopt.downgrade_after_inactive_days", "10");
-        // set the compiler filter for shared apks to quicken
-        property_set("pm.dexopt.shared", "quicken");
-	// set swap options
-	property_set("ro.vendor.qti.config.swap", "true");
-    }
-				
+    property_override("dalvik.vm.heapstartsize", heapstartsize);
+    property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
+    property_override("dalvik.vm.heapsize", heapsize);
+    property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
+    property_override("dalvik.vm.heapminfree", heapminfree);
+    property_override("dalvik.vm.heapmaxfree", heapmaxfree);
+    				
     string boot_cert = android::base::GetProperty("ro.boot.product.cert", "");
 
     if (boot_cert == "M1810F6LG" || boot_cert == "M1810F6LH" || boot_cert == "M1810F6LI"
