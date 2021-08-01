@@ -98,3 +98,7 @@ persist.debug.wfd.enable=0
 
 # Force wifi interface for wlan0
 wifi.interface=wlan0
+
+#Whitelisting the below packages
+persist.vendor.camera.privapp.list=com.google.android.apps.cameralite
+persist.camera.privapp.list=com.google.android.apps.cameralite

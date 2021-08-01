@@ -134,7 +134,7 @@ PRODUCT_PACKAGES += \
     libgui_vendor \
     libdng_sdk.vendor \
     libstdc++.vendor \
-    Camera2
+    GoogleCameraGo
 
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \
