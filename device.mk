@@ -134,7 +134,7 @@ PRODUCT_PACKAGES += \
     libgui_vendor \
     libdng_sdk.vendor \
     libstdc++.vendor \
-    Snap
+    Camera2
 
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \
