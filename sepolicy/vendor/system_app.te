@@ -1,0 +1,18 @@
+allow system_app vendor_default_prop:file { getattr open read };
+allow system_app vendor_default_prop:file {map};
+
+# Battery Health
+allow system_app sysfs_battery_supply:dir { search };
+allow system_app sysfs_battery_supply:file { read };
+allow system_app sysfs_battery_supply:file { open };
+allow system_app sysfs_battery_supply:file { getattr };
+
+# FPS Info
+allow system_app sysfs_fps:dir search;
+allow system_app sysfs_fps:file r_file_perms;
+
+# fm_radio app needes  open read write on fm_radio_device
+allow system_app fm_radio_device:chr_file r_file_perms;
+
+# FM radio needs to set fm properties
+set_prop(system_app, vendor_fm_prop)
