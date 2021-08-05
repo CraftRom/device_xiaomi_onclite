@@ -1,0 +1,20 @@
+on early-boot
+    chown system system /sys/class/leds/red/breath
+
+    chown system system /sys/class/leds/green/breath
+
+    chown system system /sys/class/leds/blue/breath
+
+    chown system system /sys/class/leds/white/breath
+    chown system system /sys/class/leds/white/brightness
+
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+
+    chown system system /sys/class/leds/button-backlight/brightness
+
+service vendor.light-onclite /vendor/bin/hw/android.hardware.lights-service.onclite
+    class hal
+    user system
+    group system
+    shutdown critical
