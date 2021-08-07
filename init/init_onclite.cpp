@@ -27,19 +27,19 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <fstream>
+#include <android-base/properties.h>
+#include <stdlib.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <stdio.h>
+#include <sys/_system_properties.h>
 #include <sys/sysinfo.h>
-#include <unistd.h>
+#include <sys/system_properties.h>
 #include <vector>
 
-#include <android-base/properties.h>
-#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
-#include <sys/_system_properties.h>
-
-#include "vendor_init.h"
 #include "property_service.h"
-#include "android/log.h"
+#include "vendor_init.h"
+
+using android::base::GetProperty;
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
@@ -48,17 +48,14 @@ char const *heapminfree;
 char const *heapmaxfree;
 char const *heaptargetutilization;
 
-using android::base::GetProperty;
+void property_override(char const prop[], char const value[]) {
+  prop_info *pi;
 
-void property_override(char const prop[], char const value[], bool add = true) {
-    prop_info *pi;
-
-    pi = (prop_info *)__system_property_find(prop);
-    if (pi) {
-        __system_property_update(pi, value, strlen(value));
-    } else if (add) {
-        __system_property_add(prop, strlen(prop), value, strlen(value));
-    }
+  pi = (prop_info *)__system_property_find(prop);
+  if (pi)
+    __system_property_update(pi, value, strlen(value));
+  else
+    __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
 void full_property_override(const std::string &prop, const char value[], const bool product) {
