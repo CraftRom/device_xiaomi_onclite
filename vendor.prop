@@ -45,10 +45,6 @@ drm.service.enabled=true
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 
-# FM
-ro.fm.transmitter=false
-vendor.hw.fm.init=0
-
 # Graphics
 ro.opengles.version=196610
 
