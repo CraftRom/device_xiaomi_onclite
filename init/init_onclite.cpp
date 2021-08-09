@@ -5,15 +5,15 @@
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
    met:
-    	* Redistributions of source code must retain the above copyright
-    	  notice, this list of conditions and the following disclaimer.
-    	* Redistributions in binary form must reproduce the above
-    	  copyright notice, this list of conditions and the following
-    	  disclaimer in the documentation and/or other materials provided
-    	  with the distribution.
-    	* Neither the name of The Linux Foundation nor the names of its
-    	  contributors may be used to endorse or promote products derived
-    	  from this software without specific prior written permission.
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+    * Neither the name of The Linux Foundation nor the names of its
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
    THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
@@ -28,7 +28,7 @@
  */
 
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <string.h>
 #include <sys/sysinfo.h>
@@ -40,7 +40,13 @@
 
 #include "vendor_init.h"
 #include "property_service.h"
-#include "android/log.h"
+
+using android::base::GetProperty;
+using std::string;
+
+// Set dalvik heap configuration
+string heapstartsize, heapgrowthlimit, heapsize, heapminfree,
+       heapmaxfree, heaptargetutilization;
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
@@ -49,108 +55,77 @@ char const *heapminfree;
 char const *heapmaxfree;
 char const *heaptargetutilization;
 
-using std::string;
-
-void property_override(char const prop[], char const value[], bool add = true)
+void property_override(string prop, string value)
 {
-    	auto pi = (prop_info *) __system_property_find(prop);
+    auto pi = (prop_info*) __system_property_find(prop.c_str());
 
-    	if (pi != nullptr) {
-    	    	__system_property_update(pi, value, strlen(value));
-    	} else if (add) {
-    	    	__system_property_add(prop, strlen(prop), value, strlen(value));
-    	}
+    if (pi != nullptr)
+        __system_property_update(pi, value.c_str(), value.size());
+    else
+        __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
 }
 
-void property_set(string prop, string value) {
-    	auto pi = (prop_info*) __system_property_find(prop.c_str());
+void check_device() {
+    struct sysinfo sys;
+    sysinfo(&sys);
 
-    	if (pi != nullptr)
-    	    	__system_property_update(pi, value.c_str(), value.size());
-    	else
-    	    	__system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
-}
-
-void load_finger(string fingerprint, string description) {
-    	string RO_PROP_SOURCES[] = {"", "odm.", "product.", "system.", "system_ext.", "vendor."};
-
-    	for (const string &source : RO_PROP_SOURCES) {
-    	    	property_set(string("ro.") + source + string("build.fingerprint"), fingerprint);
-    	    	property_set(string("ro.") + source + string("build.description"), description);
-    	}
+    if (sys.totalram > 3072ull * 1024 * 1024) {
+        // Set for 4GB RAM
+        // from - phone-xxhdpi-4096-dalvik-heap.mk
+        heapstartsize = "8m";
+        heapgrowthlimit = "256m";
+        heapsize = "512m";
+        heaptargetutilization = "0.6";
+        heapminfree = "4m";
+        heapmaxfree = "16m";
+    } else if (sys.totalram > 2048ull * 1024 * 1024) {
+        // Set for 3GB RAM
+        // from - phone-xhdpi-2048-dalvik-heap.mk
+        heapstartsize = "8m";
+        heapgrowthlimit = "192m";
+        heapsize = "512m";
+        heaptargetutilization = "0.75";
+        heapminfree = "2m";
+        heapmaxfree = "8m";
+    } else {
+        // Set for 2GB RAM
+        // from go_defaults_common.prop
+        heapstartsize = "8m";
+        heapgrowthlimit = "128m";
+        heapsize = "256m";
+        heaptargetutilization = "0.75";
+        heapminfree = "512k";
+        heapmaxfree = "8m";
+    }
 }
 
 void load_props(string device, string model) {
-    	string RO_PROP_SOURCES[] = {"", "odm.", "product.", "system.", "system_ext.", "vendor."};
+    string prop_partitions[] = { "", "odm.", "product.", "system.",
+                    "system_ext.", "bootimage.", "vendor." };
 
-    	for (const string &source : RO_PROP_SOURCES) {
-    	    	property_set(string("ro.product.") + source + string("name"), device);
-    	    	property_set(string("ro.product.") + source + string("device"), device);
-    	    	property_set(string("ro.product.") + source + string("model"), model);
-    	}
-}
-
-void check_device()
-{
-    	struct sysinfo sys;
-
-    	sysinfo(&sys);
-
-    	if (sys.totalram > 3072ull * 1024 * 1024) {
-    	    	// Set for 4GB RAM
-    	    	// from - phone-xxhdpi-4096-dalvik-heap.mk
-    	    	heapstartsize = "8m";
-    	    	heapgrowthlimit = "256m";
-    	    	heapsize = "512m";
-    	    	heaptargetutilization = "0.6";
-    	    	heapminfree = "8m";
-    	    	heapmaxfree = "16m";
-    	} else if (sys.totalram > 2048ull * 1024 * 1024) {
-    	    	// Set for 3GB RAM
-    	    	// from - phone-xhdpi-2048-dalvik-heap.mk
-    	    	heapstartsize = "8m";
-    	    	heapgrowthlimit = "192m";
-    	    	heapsize = "512m";
-    	    	heaptargetutilization = "0.75";
-    	    	heapminfree = "512k";
-    	    	heapmaxfree = "8m";
-    	} else {
-    	    	// Set for 2GB RAM
-    	    	// from go_defaults_common.prop
-    	    	heapstartsize = "8m";
-    	    	heapgrowthlimit = "128m";
-    	    	heapsize = "256m";
-    	    	heaptargetutilization = "0.75";
-    	    	heapminfree = "512k";
-    	    	heapmaxfree = "8m";
-    	}
+    for (const string &prop : prop_partitions) {
+        property_override(string("ro.product.") + prop + string("name"), device);
+        property_override(string("ro.product.") + prop + string("device"), device);
+        property_override(string("ro.product.") + prop + string("model"), model);
+        property_override(string("ro.") + prop + string("build.product"), device);
+    }
 }
 
 void vendor_load_properties()
 {
-    	const char *fingerprint = "google/redfin/redfin:11/RQ3A.210805.001.A1/7474174:user/release-keys";
-    	const char *description = "redfin-user 11 RQ3A.210805.001.A1/7474174 release-keys";
-    	
-    	check_device();
+    check_device();
+    
+    // Override all partitions' props
+    if (boot_cert == "M1810F6LG" || boot_cert == "M1810F6LH" || boot_cert == "M1810F6LI"
+            || boot_cert == "M1810F6LE" || boot_cert == "M1810F6LT" || boot_cert == "M1810F6LC")
+        load_props("onclite", "Redmi 7");
+    else
+        load_props("onc", "Redmi Y3");
 
-    	property_override("dalvik.vm.heapstartsize", heapstartsize);
-    	property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    	property_override("dalvik.vm.heapsize", heapsize);
-    	property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    	property_override("dalvik.vm.heapminfree", heapminfree);
-    	property_override("dalvik.vm.heapmaxfree", heapmaxfree);
-    	
-    	property_override("ro.boot.verifiedbootstate", "green");
-	property_override("ro.boot.flash.locked", "1");
-    	
-    	load_finger(fingerprint, description);
-    					
-    	string boot_cert = android::base::GetProperty("ro.boot.product.cert", "");
-
-    	if (boot_cert == "M1810F6LG" || boot_cert == "M1810F6LH" || boot_cert == "M1810F6LI"
-    	    	    	|| boot_cert == "M1810F6LE" || boot_cert == "M1810F6LT" || boot_cert == "M1810F6LC")
-    	    	load_props("onclite", "Redmi 7");
-    	else
-    	    	load_props("onc", "Redmi Y3");
-
+    property_override("dalvik.vm.heapstartsize", heapstartsize);
+    property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
+    property_override("dalvik.vm.heapsize", heapsize);
+    property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
+    property_override("dalvik.vm.heapminfree", heapminfree);
+    property_override("dalvik.vm.heapmaxfree", heapmaxfree);
 }
