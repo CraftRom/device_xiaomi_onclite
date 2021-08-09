@@ -311,6 +311,11 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
+# Overlays
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay \
+    NotchBarKiller
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
