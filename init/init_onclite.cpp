@@ -48,13 +48,6 @@ using std::string;
 string heapstartsize, heapgrowthlimit, heapsize, heapminfree,
        heapmaxfree, heaptargetutilization;
 
-char const *heapstartsize;
-char const *heapgrowthlimit;
-char const *heapsize;
-char const *heapminfree;
-char const *heapmaxfree;
-char const *heaptargetutilization;
-
 void property_override(string prop, string value)
 {
     auto pi = (prop_info*) __system_property_find(prop.c_str());
@@ -115,6 +108,7 @@ void vendor_load_properties()
 {
     check_device();
     
+    string boot_cert = android::base::GetProperty("ro.boot.product.cert", "");
     // Override all partitions' props
     if (boot_cert == "M1810F6LG" || boot_cert == "M1810F6LH" || boot_cert == "M1810F6LI"
             || boot_cert == "M1810F6LE" || boot_cert == "M1810F6LT" || boot_cert == "M1810F6LC")
