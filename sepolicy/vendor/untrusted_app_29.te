@@ -1,0 +1,2 @@
+allow untrusted_app_29 proc:file { getattr };
+allow untrusted_app_29 proc_max_map_count:file { read open getattr };

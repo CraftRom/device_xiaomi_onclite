@@ -1,1 +1,8 @@
 get_prop(untrusted_app, camera_prop)
+
+allow untrusted_app proc_zoneinfo:file { getattr open read };
+
+# Some apps ship with shared libraries and binaries that they write out
+# to their sandbox directory and then execute.
+allow untrusted_app app_data_file:file { r_file_perms execute };
+auditallow untrusted_app app_data_file:file execute;
