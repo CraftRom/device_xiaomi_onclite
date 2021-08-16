@@ -1,0 +1,2 @@
+# Allow surfaceflinger to search firmware directory
+allow surfaceflinger vendor_firmware_file:dir search;
