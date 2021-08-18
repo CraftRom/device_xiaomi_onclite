@@ -508,6 +508,11 @@ service vendor.sensors.qti /vendor/bin/sensors.qti
     capabilities NET_BIND_SERVICE
     writepid /dev/cpuset/system-background/tasks
 
+service vendor-sensor-sh /vendor/bin/init.qcom.sensors.sh
+    class core
+    user root
+    oneshot
+
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 \
     -g@android:vendor_wpa_wlan0
