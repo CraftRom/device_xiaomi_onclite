@@ -22,11 +22,8 @@ cc_library_static {
     srcs: ["init_onclite.cpp"],
     whole_static_libs: ["libbase","libselinux"],
     include_dirs: [
-        "system/core/base/include",
-        "system/core/init"
-    ],
-    shared_libs: [
-        "libbase",
+        "system/core/init",
+        "system/libbase/include"
     ]
 }
 
