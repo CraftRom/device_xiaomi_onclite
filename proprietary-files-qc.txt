@@ -1130,13 +1130,13 @@ vendor/lib/vendor.qti.gnss@2.0.so|ef5e1e3718cd71a01a4ca7b06f38d56b6aca50aa
 vendor/lib/vendor.qti.gnss@2.1.so|c7eeb37d061f7978624810ccc1d1d7f25e9f95da
 vendor/lib/vendor.qti.gnss@3.0.so|e4f5a7fd2dcdf56f8d69e4d0b27e996812ebd295
 
-# Gatekeeper - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
-vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti|bea6d682011b465a08b9085f7b5e69b965743eee
+# Gatekeeper - from LA.UM.8.6.2.r1-08400-89xx.0
+vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti|14751f15eba2a00f20a39d1ec4fccbacb819ab34
 vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc|1b8d5f58fe0a57906acf72b862c16a2521daa97b
-vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so|b04d8ae5d3851f29fd8b7c8e034fa0ef04fb96f3
-vendor/lib/hw/gatekeeper.msm8953.so|cd04140788659ae07a50081baeb3eb2e42f37028
-vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so|4bc9f319b3a62f3d8e3e0c539b577027c263e7df
-vendor/lib64/hw/gatekeeper.msm8953.so|1086e5dcda7aa2bed7ac015f7850095f6199a1c2
+vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so|2ed92d04aca9339f56ff0610686af498cad27307
+vendor/lib/hw/gatekeeper.msm8953.so|c153dbbd2c31ccee8633837961ce79909257af04
+vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so|c7f9143b16a728072cfb262e25c12bc63ce17be9
+vendor/lib64/hw/gatekeeper.msm8953.so|2982026cfb7911d279bd4c9be3a02ad21cdb54ec
 
 # Graphics - from daisy-user-10-QKQ1.191002.002-V11.0.21.0.QDLMIXM-release-keys
 vendor/lib/egl/eglSubDriverAndroid.so|fd8988a606cec377e01127be389c98fffd0121a6
@@ -1210,21 +1210,21 @@ vendor/lib64/libqti-iopd-client.so|40155dd9b4218e317d23c23c2529cf5f709cdd9f
 vendor/lib64/vendor.qti.hardware.iop@1.0.so|a9d2a6bec613954b422a4f50fee70ec0754be65d
 vendor/lib64/vendor.qti.hardware.iop@2.0.so|0b657aa0eaedb463ef96df94b31010449c5a34a9
 
-# Keymaster - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
-vendor/bin/hw/android.hardware.keymaster@4.0-service-qti|13a894ea69abc056b754fa9e8f8e828ffd1de38c
-vendor/etc/init/android.hardware.keymaster@4.0-service-qti.rc|e502c7046fb6a1955e54936d6c8f4f8c2889b201
-vendor/lib/libkeymasterdeviceutils.so|e3557fd2bc5d01de71b62e378dc51a2696a99768
-vendor/lib/libkeymasterprovision.so|b7a67b7df996341798e01948745dc63f5386b456
-vendor/lib/libkeymasterutils.so|228caaa1bfa8ac3d434f9ac158ca8d1dc1b8c667
-vendor/lib/libqtikeymaster4.so|986f8c48991f4004acecf8ba1c9e442afdcd9ea2
-vendor/lib64/libkeymasterdeviceutils.so|784e8f3e6bb36214d171ba127454554049d140f5
-vendor/lib64/libkeymasterprovision.so|245fa13cad4dc81e66bc6fc3b7d20fa6c1afdefc
-vendor/lib64/libkeymasterutils.so|126096a6ce1ce50db8193a4617f1b1b0f6b3105c
-vendor/lib64/libqtikeymaster4.so|4fea65bc5cdfb2299100cbaeeb80984780b11a17
+# Keymaster - LA.UM.8.6.2.r1-08400-89xx.0
+vendor/bin/hw/android.hardware.keymaster@4.0-service-qti|f2ce9a6ddb3e8b401903eb5da92885dff8fc7222
+vendor/etc/init/android.hardware.keymaster@4.0-service-qti.rc|c8999fb1bccbef81e6b362059e9a6ebd023de98f
+vendor/lib/libkeymasterdeviceutils.so|ae15183797ebc54a3775bdcfdfde42172dfa2cb6
+vendor/lib/libkeymasterprovision.so|3a496c320b7f6f5c724a771a897e7e35ce38c74d
+vendor/lib/libkeymasterutils.so|6cabf5a838fef3758d637ace81256629d90f1368
+vendor/lib/libqtikeymaster4.so|7dfb146008464a26a1a68ee47a38f013b4137d16
+vendor/lib64/libkeymasterdeviceutils.so|ea44915adfee57f1bd813b2184987565d396ab82
+vendor/lib64/libkeymasterprovision.so|6bf0256c9c1a05ff8350ee2a50ad7c523ae2324b
+vendor/lib64/libkeymasterutils.so|2791994395cd10eb1092b8bd8fea15987e17421d
+vendor/lib64/libqtikeymaster4.so|f21ad45a4fb678f66006e2fa8902a3145e9c457b
 
-# Keystore - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
-vendor/lib/hw/keystore.msm8953.so|c56d3768e04fc180d844dbca94be8c27770e37d5
-vendor/lib64/hw/keystore.msm8953.so|9660e1c13a3589114cf18db58e5b3c3c9e14059b
+# Keystore - LA.UM.8.6.2.r1-08400-89xx.0
+vendor/lib/hw/keystore.msm8953.so|67c300556d86c5013628f7a04a30f8893fc241d9
+vendor/lib64/hw/keystore.msm8953.so|b2cab45df036a248a7004281bae9a6005d7e74c6
 
 # Latency - from daisy-user 10 QKQ1.191002.002.V11.0.19.0.QDLMIXM V11.0.19.0.QDLMIXM release-keys
 product/framework/vendor.qti.hardware.data.latency-V1.0-java.jar|c6c5d5bbf50b068df0184aef8551b95daa5f4791
