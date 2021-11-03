@@ -24,6 +24,16 @@ vendor.voice.voip.conc.disabled=true
 vendor.bluetooth.soc=pronto
 vendor.qcom.bluetooth.soc=pronto
 
+# Dex2oat
+pm.dexopt.boot=verify
+pm.dexopt.first-boot=verify
+pm.dexopt.install=speed-profile
+dalvik.vm.image-dex2oat-filter=speed
+dalvik.vm.image-dex2oat-threads=8
+dalvik.vm.dex2oat-filter=speed
+dalvik.vm.dex2oat-threads=8
+dalvik.vm.dex2oat64.enabled=true
+
 # Dalvik
 dalvik.vm.dex2oat64.enabled=true
 ro.sys.fw.dex2oat_thread_count=8
