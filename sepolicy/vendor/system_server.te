@@ -4,7 +4,4 @@ typeattribute system_server system_executes_vendor_violators;
 r_dir_file(system_server, idc_file);
 r_dir_file(system_server, keylayout_file);
 
-# Fingerprint
-get_prop(system_server, fp_prop);
-
 allow system_server app_zygote:process getpgid;
