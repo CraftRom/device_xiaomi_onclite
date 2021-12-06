@@ -16,14 +16,17 @@
 // limitations under the License.
 //
 
-cc_library_static {
+xiaomi_onclite_init_library_static {
     name: "libinit_onclite",
     recovery_available: true,
-    srcs: ["init_onclite.cpp"],
-    whole_static_libs: ["libbase","libselinux"],
+    srcs: [
+        "init_onclite.cpp",
+        "DeviceLibinit.cpp"
+    ],
     include_dirs: [
         "system/core/base/include",
-        "system/core/init"
+        "system/core/init",
+        "device/xiaomi/onclite"
     ],
     shared_libs: [
         "libbase",

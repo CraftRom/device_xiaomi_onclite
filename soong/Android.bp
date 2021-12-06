@@ -1,0 +1,17 @@
+bootstrap_go_package {
+    name: "soong-xiaomi-onclite-plugins",
+    pkgPath: "device/xiaomi/onclite",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+        "init.go",
+        "main.go",
+    ],
+    pluginFor: ["soong_build"],
+}

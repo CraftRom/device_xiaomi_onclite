@@ -37,16 +37,22 @@
 #include <android-base/properties.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
+#include <init/DeviceLibinit.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 
 using android::base::GetProperty;
+using android::base::SetProperty;
 using std::string;
 
 // Set dalvik heap configuration
-string heapstartsize, heapgrowthlimit, heapsize, heapminfree,
-       heapmaxfree, heaptargetutilization;
+char const *heapstartsize;
+char const *heapgrowthlimit;
+char const *heapsize;
+char const *heapminfree;
+char const *heapmaxfree;
+char const *heaptargetutilization;
 
 void property_override(string prop, string value)
 {
@@ -108,7 +114,7 @@ void vendor_load_properties()
 {
     check_device();
     
-    string boot_cert = android::base::GetProperty("ro.boot.product.cert", "");
+    string boot_cert = GetProperty("ro.boot.product.cert", "");
     // Override all partitions' props
     if (boot_cert == "M1810F6LG" || boot_cert == "M1810F6LH" || boot_cert == "M1810F6LI"
             || boot_cert == "M1810F6LE" || boot_cert == "M1810F6LT" || boot_cert == "M1810F6LC")
@@ -116,14 +122,14 @@ void vendor_load_properties()
     else
         load_props("onc", "Redmi Y3");
 
-    property_override("dalvik.vm.heapstartsize", heapstartsize);
-    property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    property_override("dalvik.vm.heapsize", heapsize);
-    property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    property_override("dalvik.vm.heapminfree", heapminfree);
-    property_override("dalvik.vm.heapmaxfree", heapmaxfree);
+    SetProperty("dalvik.vm.heapstartsize", heapstartsize);
+    SetProperty("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
+    SetProperty("dalvik.vm.heapsize", heapsize);
+    SetProperty("dalvik.vm.heaptargetutilization", heaptargetutilization);
+    SetProperty("dalvik.vm.heapminfree", heapminfree);
+    SetProperty("dalvik.vm.heapmaxfree", heapmaxfree);
 
     // SafetyNet Workaround
-    property_override("ro.boot.verifiedbootstate", "green");
-    property_override("ro.oem_unlock_supported", "0");
+    SetProperty("ro.boot.verifiedbootstate", "green");
+    SetProperty("ro.oem_unlock_supported", "0");
 }
