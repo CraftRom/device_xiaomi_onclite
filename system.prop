@@ -85,6 +85,11 @@ vendor.display.disable_skip_validate=1
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
 
+# Render Engine
+debug.hwui.renderer=skiagl
+debug.renderengine.backend=skiaglthreaded
+renderthread.skia.reduceopstasksplitting=true
+
 # Media
 media.stagefright.thumbnail.prefer_hw_codecs=true
 vendor.mm.enable.qcom_parser=1048575
