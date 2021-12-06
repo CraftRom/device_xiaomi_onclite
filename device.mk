@@ -138,6 +138,11 @@ PRODUCT_PACKAGES += \
     libstdc++.vendor \
     GoogleCameraGo
 
+# Codec2 modules
+PRODUCT_PACKAGES += \
+    com.android.media.swcodec \
+    libsfplugin_ccodec
+    
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=4m \
@@ -298,6 +303,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml
 
+# Media / StagefrightCodec 2.0
+PRODUCT_PACKAGES += \
+    libstagefright_ccodec
+    
 # Netutils
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0 \
