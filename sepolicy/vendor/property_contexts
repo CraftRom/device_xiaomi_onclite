@@ -15,3 +15,6 @@ sys.fp.goodix		   u:object_r:fp_prop:s0
 sys.fp.vendor	           u:object_r:fp_prop:s0
 persist.sys.fp.            u:object_r:fp_prop:s0
 persist.vendor.sys.fp.     u:object_r:fp_prop:s0
+
+# Hardware
+ro.hardware.chipname       u:object_r:exported_default_prop:s0
